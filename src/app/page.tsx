@@ -14,11 +14,17 @@ export default function Home() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Navbar />
-      <Box sx={{ display: "flex", flex: 1, pt: 2 }}>
+      <Box sx={{ display: "flex", flex: 1, p: 4 }}>
         <FilterSidebar />
         <Container
           maxWidth="xl"
-          sx={{ display: "flex", flexDirection: "column", gap: 2, py: 2 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            py: 2,
+            width: "75%",
+          }}
           className="bg-white rounded-lg"
         >
           {mapVisible && <MapView />}

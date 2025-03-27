@@ -156,33 +156,6 @@ export default function FilterSidebar() {
           </RadioGroup>
         </Box>
 
-        <Box sx={{ mb: { xs: 2, sm: 3 }, px: { xs: 0.5, sm: 1 } }}>
-          <Typography
-            variant="subtitle2"
-            gutterBottom
-            sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
-          >
-            Collection time
-          </Typography>
-          <Slider
-            value={filters.pickupTimeRange}
-            onChange={handleTimeRangeChange}
-            valueLabelDisplay="auto"
-            min={0}
-            max={24}
-            marks={[
-              { value: 0, label: "00:00" },
-              { value: 12, label: "12:00" },
-              { value: 24, label: "24:00" },
-            ]}
-            sx={{
-              "& .MuiSlider-markLabel": {
-                fontSize: { xs: "0.75rem", sm: "0.875rem" },
-              },
-            }}
-          />
-        </Box>
-
         <Box sx={{ mb: { xs: 2, sm: 3 } }}>
           <Typography
             variant="subtitle2"

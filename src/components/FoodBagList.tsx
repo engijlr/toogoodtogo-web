@@ -7,6 +7,7 @@ import {
   Typography,
   Box,
   Chip,
+  chipClasses,
   Rating,
   Skeleton,
 } from "@mui/material";
@@ -63,7 +64,7 @@ export default function FoodBagList() {
         }}
         className="w-full"
       >
-        <CarouselContent>
+        <CarouselContent className="py-4 px-2">
           {foodBags?.map((bag) => (
             <CarouselItem
               key={bag.id}
@@ -71,11 +72,16 @@ export default function FoodBagList() {
                 foodBags.length <= 2 ? "basis-1/2" : "basis-1/3"
               }`}
             >
-              <Box sx={{ width: foodBags.length >= 4 ? "100%" : 485 }}>
+              <Box
+                sx={{
+                  width: foodBags.length >= 4 ? "100%" : 485,
+                  height: "100%",
+                }}
+              >
                 <Card
                   sx={{
                     display: "flex",
-                    height: "auto",
+                    height: "100%",
                     minHeight: { xs: "100px", sm: "120px" },
                     overflow: "hidden",
                     "&:hover": {
@@ -244,28 +250,16 @@ export default function FoodBagList() {
                         <Chip
                           label={`${bag.quantity} left`}
                           size="small"
-                          sx={{
-                            bgcolor: "success.main",
+                          sx={(theme) => ({
+                            borderColor: "success.main",
+                            backgroundColor: theme.palette.success.main,
                             color: "white",
                             height: { xs: "18px", sm: "20px" },
-                            "& .MuiChip-label": {
+                            [`& .${chipClasses.label}`]: {
                               px: { xs: 0.5, sm: 1 },
                               fontSize: { xs: "0.65rem", sm: "0.75rem" },
                             },
-                          }}
-                        />
-                        <Chip
-                          label="Ending soon"
-                          size="small"
-                          sx={{
-                            bgcolor: "error.main",
-                            color: "white",
-                            height: { xs: "18px", sm: "20px" },
-                            "& .MuiChip-label": {
-                              px: { xs: 0.5, sm: 1 },
-                              fontSize: { xs: "0.65rem", sm: "0.75rem" },
-                            },
-                          }}
+                          })}
                         />
                       </Box>
                     </Box>

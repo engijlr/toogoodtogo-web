@@ -19,7 +19,7 @@ import { recommendedBags } from "@/store/mockData";
 
 export default function RecommendedList() {
   return (
-    <Box sx={{ px: 2, pb: 2 }}>
+    <Box sx={{ pb: 2 }}>
       <Box
         sx={{
           display: "flex",
@@ -37,31 +37,35 @@ export default function RecommendedList() {
       <Box
         sx={{
           display: "flex",
-          gap: 2,
+          gap: 3,
           overflowX: "auto",
-          px: 2,
+          pt: 2,
           pb: 2,
+          px: 1,
         }}
       >
         {recommendedBags.map((bag) => (
           <Card
             key={bag.id}
             sx={{
-              flex: "1 1 calc(25% - 16px)", // 4 cards per row, subtracting gap
-              maxWidth: "calc(25% - 16px)",
-              minWidth: 260,
-              borderRadius: 2,
-              boxShadow: 1,
+              width: 300,
+              borderRadius: 3,
+              overflow: "hidden",
               position: "relative",
+              boxShadow: 3,
+              backgroundColor: "white",
+              flex: "0 0 auto",
             }}
           >
-            <Box sx={{ position: "relative" }}>
+            <Box sx={{ position: "relative", bgcolor: "#fcefcf" }}>
               <CardMedia
                 component="img"
-                height="140"
                 image={bag.imageUrl}
                 alt={bag.title}
-                sx={{ objectFit: "cover" }}
+                sx={{
+                  height: 180,
+                  objectFit: "cover",
+                }}
               />
 
               <Chip
@@ -71,21 +75,11 @@ export default function RecommendedList() {
                   position: "absolute",
                   top: 8,
                   left: 8,
-                  backgroundColor: "#f1f1c6",
+                  backgroundColor: "#e0f2c2",
                   fontWeight: 600,
                 }}
               />
-              <Chip
-                label="Ending soon"
-                size="small"
-                sx={{
-                  position: "absolute",
-                  top: 8,
-                  left: 100,
-                  backgroundColor: "#f1f1c6",
-                  fontWeight: 600,
-                }}
-              />
+
               <Chip
                 icon={<StarIcon sx={{ color: "white" }} />}
                 label={bag.rating}
@@ -94,74 +88,92 @@ export default function RecommendedList() {
                   position: "absolute",
                   top: 8,
                   right: 8,
-                  backgroundColor: "green",
+                  backgroundColor: "#388e3c",
                   color: "white",
                   fontWeight: 600,
                 }}
               />
+
+              {/* Store logo in circle */}
               <Box
                 component="img"
                 src={bag.logoUrl}
                 alt="store logo"
                 sx={{
-                  width: 36,
-                  height: 36,
+                  width: 48,
+                  height: 48,
                   borderRadius: "50%",
                   position: "absolute",
-                  bottom: -18,
-                  left: 12,
+                  bottom: 14,
+                  left: 16,
                   border: "2px solid white",
+                  backgroundColor: "#333", // dark circle background
+                  p: 0.5,
+                  objectFit: "contain",
                 }}
               />
             </Box>
 
-            <CardContent sx={{ pt: 3 }}>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box>
-                  <Typography fontWeight={600} variant="subtitle2">
-                    {bag.storeName}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {bag.title}
-                  </Typography>
-                </Box>
+            <CardContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  mb: 0.5,
+                }}
+              >
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={700}
+                  sx={{ fontSize: "0.95rem", lineHeight: 1.3 }}
+                >
+                  {bag.storeName}
+                </Typography>
                 <IconButton size="small">
                   <FavoriteBorderIcon fontSize="small" />
                 </IconButton>
               </Box>
 
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}
+              <Typography
+                variant="body2"
+                sx={{ fontSize: "0.85rem", color: "#444" }}
               >
-                <AccessTimeIcon fontSize="small" color="action" />
+                {bag.title}
+              </Typography>
+
+              <Box sx={{ display: "flex", alignItems: "center", mt: 0.5 }}>
                 <Typography variant="caption" color="text.secondary">
-                  Collect {bag.pickupTime}
+                  Pick up today: {bag.pickupTime}
                 </Typography>
-                <LocationOnIcon fontSize="small" color="action" />
                 <Typography variant="caption" color="text.secondary">
-                  {bag.distance} km
+                  {bag.distance.toFixed(1)} km
                 </Typography>
               </Box>
 
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
+                  borderTop: "1px dashed #ddd",
                   mt: 1,
-                  alignItems: "flex-end",
+                  pt: 1,
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: 1,
+                  alignItems: "baseline",
                 }}
               >
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ textDecoration: "line-through", color: "#999" }}
-                  >
-                    {bag.originalPrice.toFixed(2)} DKK
-                  </Typography>
-                  <Typography variant="h6" fontWeight={600}>
-                    {bag.price.toFixed(2)} DKK
-                  </Typography>
-                </Box>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    textDecoration: "line-through",
+                    color: "#999",
+                    fontWeight: 400,
+                  }}
+                >
+                  DKK{bag.originalPrice.toFixed(2)}
+                </Typography>
+                <Typography variant="subtitle1" fontWeight={700}>
+                  DKK{bag.price.toFixed(2)}
+                </Typography>
               </Box>
             </CardContent>
           </Card>
