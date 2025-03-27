@@ -96,3 +96,75 @@ export const mockFoodBags: FoodBag[] = [
     quantity: 4,
   },
 ];
+
+interface RecommendedBag {
+  id: string;
+  storeName: string;
+  title: string;
+  imageUrl: string;
+  logoUrl: string;
+  rating: number;
+  distance: number;
+  pickupTime: string;
+  price: number;
+  originalPrice: number;
+  quantity: number;
+}
+
+export const recommendedBags: RecommendedBag[] = [
+  {
+    id: "r1",
+    storeName: "Joe & The Juice",
+    title: "Fresh Juice & Sandwich Box",
+    imageUrl:
+      "https://images.unsplash.com/photo-1577003811926-53b288a6e5d0?w=800",
+    logoUrl: "/stores-logo-1.svg",
+    rating: 4.5,
+    distance: 3.1,
+    pickupTime: "20:30 - 21:00",
+    price: 45,
+    originalPrice: 135,
+    quantity: 4,
+  },
+  {
+    id: "r2",
+    storeName: "Lagkagehuset",
+    title: "Danish Pastry Surprise Box",
+    imageUrl:
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800",
+    logoUrl: "/stores-logo-1.svg",
+    rating: 4.6,
+    distance: 1.8,
+    pickupTime: "20:00 - 20:30",
+    price: 59,
+    originalPrice: 180,
+    quantity: 3,
+  },
+  {
+    id: "r3",
+    storeName: "Netto",
+    title: "Grocery Rescue Box",
+    imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800",
+    logoUrl: "/stores-logo-1.svg",
+    rating: 4.2,
+    distance: 2.5,
+    pickupTime: "19:00 - 21:00",
+    price: 39,
+    originalPrice: 120,
+    quantity: 5,
+  },
+  {
+    id: "r4",
+    storeName: "7-Eleven",
+    title: "Midnight Snacks Deal",
+    imageUrl:
+      "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=800",
+    logoUrl: "/stores-logo-1.svg",
+    rating: 4.0,
+    distance: 0.9,
+    pickupTime: "21:00 - 22:00",
+    price: 35,
+    originalPrice: 95,
+    quantity: 1,
+  },
+];

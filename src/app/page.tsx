@@ -6,6 +6,7 @@ import MapView from "@/components/MapView";
 import FoodBagList from "@/components/FoodBagList";
 import { useState } from "react";
 import FilterSidebar from "@/components/FilterSidebar";
+import RecommendedList from "@/components/RecommendedList";
 
 export default function Home() {
   const [mapVisible, setMapVisible] = useState(true);
@@ -22,6 +23,7 @@ export default function Home() {
         >
           {mapVisible && <MapView />}
           <FoodBagList />
+          <RecommendedList />
         </Container>
       </Box>
     </Box>
