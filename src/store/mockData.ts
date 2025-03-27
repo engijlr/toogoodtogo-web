@@ -20,8 +20,8 @@ export const mockFoodBags: FoodBag[] = [
       address: "Fisketorvet 2, 1560 Copenhagen",
     },
     imageUrl: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800",
-    foodType: ["Bread & Pastries", "Drinks"],
-    dietaryInfo: ["Vegetarian"],
+    foodType: ["bread", "drinks"],
+    dietaryInfo: ["vegetarian"],
     quantity: 2,
   },
   {
@@ -44,8 +44,8 @@ export const mockFoodBags: FoodBag[] = [
     },
     imageUrl:
       "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800",
-    foodType: ["Bread & Pastries"],
-    dietaryInfo: ["Vegetarian"],
+    foodType: ["bread"],
+    dietaryInfo: ["vegetarian"],
     quantity: 3,
   },
   {
@@ -67,8 +67,8 @@ export const mockFoodBags: FoodBag[] = [
       address: "Vesterbrogade 89, 1620 Copenhagen",
     },
     imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800",
-    foodType: ["Groceries"],
-    dietaryInfo: ["Vegan"],
+    foodType: ["groceries"],
+    dietaryInfo: ["vegan"],
     quantity: 5,
   },
   {
@@ -91,8 +91,8 @@ export const mockFoodBags: FoodBag[] = [
     },
     imageUrl:
       "https://images.unsplash.com/photo-1577003811926-53b288a6e5d0?w=800",
-    foodType: ["Drinks", "Meals"],
-    dietaryInfo: ["Vegetarian", "Vegan"],
+    foodType: ["meals", "drinks"],
+    dietaryInfo: ["vegetarian", "vegan"],
     quantity: 4,
   },
 ];

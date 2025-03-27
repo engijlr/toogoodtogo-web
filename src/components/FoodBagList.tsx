@@ -48,76 +48,120 @@ export default function FoodBagList() {
     <Grid container spacing={2}>
       {foodBags?.map((bag) => (
         <Grid size={{ xs: 12, sm: 6, md: 4 }} key={bag.id}>
-          <Card
-            sx={{ height: "100%", display: "flex", flexDirection: "column" }}
-          >
+          <Card sx={{ display: "flex", height: "120px" }}>
             <CardMedia
               component="img"
-              height="200"
+              sx={{ width: 120, height: "120px", objectFit: "cover" }}
               image={bag.imageUrl}
               alt={bag.title}
             />
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="h6" gutterBottom>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", flex: 1, p: 1.5 }}
+            >
+              <Box sx={{ mb: "auto" }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: "bold", mb: 0.5 }}
+                >
                   {bag.storeName}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mb: 1 }}
+                >
                   {bag.title}
                 </Typography>
-              </Box>
 
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}
-              >
-                <AccessTimeIcon fontSize="small" color="action" />
-                <Typography variant="body2" color="text.secondary">
-                  {`${bag.pickupTime.start} - ${bag.pickupTime.end}`}
-                </Typography>
-              </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                    mb: 0.5,
+                  }}
+                >
+                  <AccessTimeIcon sx={{ fontSize: 16 }} color="action" />
+                  <Typography variant="caption" color="text.secondary">
+                    Tomorrow {bag.pickupTime.start} - {bag.pickupTime.end}
+                  </Typography>
+                </Box>
 
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}
-              >
-                <LocationOnIcon fontSize="small" color="action" />
-                <Typography variant="body2" color="text.secondary">
-                  {`${bag.distance.toFixed(1)} km`}
-                </Typography>
-              </Box>
-
-              <Box sx={{ display: "flex", gap: 1, mb: 2, flexWrap: "wrap" }}>
-                {bag.foodType.map((type) => (
-                  <Chip key={type} label={type} size="small" />
-                ))}
+                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                  <LocationOnIcon sx={{ fontSize: 16 }} color="action" />
+                  <Typography variant="caption" color="text.secondary">
+                    {bag.distance.toFixed(1)} km
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 0.5,
+                      ml: "auto",
+                    }}
+                  >
+                    <Rating value={bag.rating} readOnly size="small" />
+                    <Typography variant="caption" color="text.secondary">
+                      {bag.rating}
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
 
               <Box
                 sx={{
                   display: "flex",
+                  alignItems: "flex-end",
                   justifyContent: "space-between",
-                  alignItems: "center",
+                  mt: 1,
                 }}
               >
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Rating value={bag.rating} readOnly size="small" />
-                  <Typography variant="body2" color="text.secondary">
-                    {bag.rating}
-                  </Typography>
-                </Box>
                 <Box>
                   <Typography
-                    variant="body2"
+                    variant="caption"
                     color="text.secondary"
-                    sx={{ textDecoration: "line-through" }}
+                    sx={{ textDecoration: "line-through", display: "block" }}
                   >
                     {bag.originalPrice.toFixed(2)} DKK
                   </Typography>
-                  <Typography variant="h6" color="primary">
+                  <Typography
+                    variant="subtitle1"
+                    color="primary"
+                    sx={{ fontWeight: "bold", lineHeight: 1 }}
+                  >
                     {bag.price.toFixed(2)} DKK
                   </Typography>
                 </Box>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                  <Chip
+                    label={`${bag.quantity} left`}
+                    size="small"
+                    sx={{
+                      bgcolor: "success.main",
+                      color: "white",
+                      height: "20px",
+                      "& .MuiChip-label": {
+                        px: 1,
+                        fontSize: "0.75rem",
+                      },
+                    }}
+                  />
+                  <Chip
+                    label="Ending soon"
+                    size="small"
+                    sx={{
+                      bgcolor: "error.main",
+                      color: "white",
+                      height: "20px",
+                      "& .MuiChip-label": {
+                        px: 1,
+                        fontSize: "0.75rem",
+                      },
+                    }}
+                  />
+                </Box>
               </Box>
-            </CardContent>
+            </Box>
           </Card>
         </Grid>
       ))}

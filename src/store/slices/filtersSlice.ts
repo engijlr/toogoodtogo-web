@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type SortOption = "relevance" | "distance" | "price" | "rating";
-export type FoodType = "meals" | "bread-pastries" | "groceries" | "other";
+export type FoodType = "bread" | "meals" | "groceries" | "drinks";
 export type DietPreference = "vegetarian" | "vegan";
 
 interface FiltersState {
@@ -54,6 +54,9 @@ const filtersSlice = createSlice({
         state.dietPreferences.splice(index, 1);
       }
     },
+    resetFilters: (state) => {
+      return initialState;
+    },
   },
 });
 
@@ -64,6 +67,7 @@ export const {
   setPickupDay,
   toggleFoodType,
   toggleDietPreference,
+  resetFilters,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

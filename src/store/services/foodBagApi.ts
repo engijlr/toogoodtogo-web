@@ -39,28 +39,31 @@ export interface SearchParams {
 
 // Mock API implementation
 const mockApiCall = (params: SearchParams): Promise<FoodBag[]> => {
-  console.log("params", params);
   return new Promise((resolve) => {
     setTimeout(() => {
       let filteredBags = [...mockFoodBags];
 
-      // Apply filters
-      if (params.query) {
-        const query = params.query.toLowerCase();
+      // Apply search query filter
+      if (params.query && params.query.trim() !== "") {
+        const searchTerm = params.query.toLowerCase().trim();
         filteredBags = filteredBags.filter(
           (bag) =>
-            bag.storeName.toLowerCase().includes(query) ||
-            bag.title.toLowerCase().includes(query)
+            bag.storeName.toLowerCase().includes(searchTerm) ||
+            bag.title.toLowerCase().includes(searchTerm) ||
+            bag.description.toLowerCase().includes(searchTerm) ||
+            bag.foodType.some((type) => type.toLowerCase().includes(searchTerm))
         );
       }
 
-      if (params.foodTypes?.length) {
+      // Apply food type filters
+      if (params.foodTypes && params.foodTypes.length > 0) {
         filteredBags = filteredBags.filter((bag) =>
           bag.foodType.some((type) => params.foodTypes?.includes(type))
         );
       }
 
-      if (params.dietPreferences?.length) {
+      // Apply dietary preference filters
+      if (params.dietPreferences && params.dietPreferences.length > 0) {
         filteredBags = filteredBags.filter((bag) =>
           bag.dietaryInfo.some((diet) => params.dietPreferences?.includes(diet))
         );
@@ -78,11 +81,14 @@ const mockApiCall = (params: SearchParams): Promise<FoodBag[]> => {
           case "rating":
             filteredBags.sort((a, b) => b.rating - a.rating);
             break;
+          // Default to relevance (no sorting)
+          default:
+            break;
         }
       }
 
       resolve(filteredBags);
-    }, 500); // Simulate network delay
+    }, 300); // Reduced delay for better UX
   });
 };
 
