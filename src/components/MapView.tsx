@@ -8,7 +8,7 @@ import { RootState } from "@/store/store";
 
 const containerStyle = {
   width: "100%",
-  height: "400px",
+  height: "100%",
 };
 
 const center = {
@@ -47,7 +47,13 @@ export default function MapView() {
   return (
     <Paper
       elevation={1}
-      sx={{ width: "100%", height: 400, overflow: "hidden" }}
+      sx={{
+        width: "100%",
+        height: { xs: 300, sm: 400 },
+        overflow: "hidden",
+        borderRadius: { xs: 0, sm: 1 },
+        mb: { xs: 2, md: 0 },
+      }}
     >
       <GoogleMap
         mapContainerStyle={containerStyle}

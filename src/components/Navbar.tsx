@@ -13,7 +13,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   return (
-    <AppBar position="sticky" elevation={1} color="primary">
+    <AppBar position="sticky" color="primary">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Image

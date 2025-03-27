@@ -21,6 +21,7 @@ export default function FoodBagList() {
   const filters = useSelector((state: RootState) => state.filters);
   const { data: foodBags, isLoading } = useGetFoodBagsQuery({
     ...filters,
+    query: filters.searchQuery,
     lat: 55.676098,
     lng: 12.568337,
   });
@@ -29,7 +30,7 @@ export default function FoodBagList() {
     return (
       <Grid container spacing={2}>
         {[1, 2, 3, 4, 5, 6].map((key) => (
-          <Grid size={{ xs: 12, md: 4 }} key={key}>
+          <Grid size={{ xs: 12, sm: 12, md: 4 }} key={key}>
             <Card>
               <Skeleton variant="rectangular" height={200} />
               <CardContent>
@@ -47,28 +48,56 @@ export default function FoodBagList() {
   return (
     <Grid container spacing={2}>
       {foodBags?.map((bag) => (
-        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={bag.id}>
-          <Card sx={{ display: "flex", height: "120px" }}>
+        <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }} key={bag.id}>
+          <Card
+            sx={{
+              display: "flex",
+              height: "auto",
+              minHeight: { xs: "100px", sm: "120px" },
+              overflow: "hidden",
+              "&:hover": {
+                boxShadow: 3,
+                transition: "box-shadow 0.3s ease-in-out",
+              },
+            }}
+          >
             <CardMedia
               component="img"
-              sx={{ width: 120, height: "120px", objectFit: "cover" }}
+              sx={{ width: 120, height: "fit", objectFit: "cover" }}
               image={bag.imageUrl}
               alt={bag.title}
             />
             <Box
-              sx={{ display: "flex", flexDirection: "column", flex: 1, p: 1.5 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                flex: 1,
+                p: { xs: 1, sm: 1.5 },
+                minWidth: 0, // Prevent content from overflowing
+              }}
             >
               <Box sx={{ mb: "auto" }}>
                 <Typography
                   variant="subtitle1"
-                  sx={{ fontWeight: "bold", mb: 0.5 }}
+                  sx={{
+                    fontWeight: "bold",
+                    mb: 0.5,
+                    fontSize: { xs: "0.875rem", sm: "1rem" },
+                  }}
                 >
                   {bag.storeName}
                 </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  sx={{ mb: 1 }}
+                  sx={{
+                    mb: 1,
+                    fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
                 >
                   {bag.title}
                 </Typography>
@@ -79,17 +108,39 @@ export default function FoodBagList() {
                     alignItems: "center",
                     gap: 0.5,
                     mb: 0.5,
+                    flexWrap: "nowrap",
                   }}
                 >
-                  <AccessTimeIcon sx={{ fontSize: 16 }} color="action" />
-                  <Typography variant="caption" color="text.secondary">
+                  <AccessTimeIcon
+                    sx={{ fontSize: { xs: 14, sm: 16 } }}
+                    color="action"
+                  />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
+                  >
                     Tomorrow {bag.pickupTime.start} - {bag.pickupTime.end}
                   </Typography>
                 </Box>
 
-                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                  <LocationOnIcon sx={{ fontSize: 16 }} color="action" />
-                  <Typography variant="caption" color="text.secondary">
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                    flexWrap: "nowrap",
+                  }}
+                >
+                  <LocationOnIcon
+                    sx={{ fontSize: { xs: 14, sm: 16 } }}
+                    color="action"
+                  />
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
+                  >
                     {bag.distance.toFixed(1)} km
                   </Typography>
                   <Box
@@ -100,8 +151,17 @@ export default function FoodBagList() {
                       ml: "auto",
                     }}
                   >
-                    <Rating value={bag.rating} readOnly size="small" />
-                    <Typography variant="caption" color="text.secondary">
+                    <Rating
+                      value={bag.rating}
+                      readOnly
+                      size="small"
+                      sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}
+                    />
+                    <Typography
+                      variant="caption"
+                      color="text.secondary"
+                      sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
+                    >
                       {bag.rating}
                     </Typography>
                   </Box>
@@ -114,35 +174,60 @@ export default function FoodBagList() {
                   alignItems: "flex-end",
                   justifyContent: "space-between",
                   mt: 1,
+                  flexWrap: "wrap", // ✅ In case text overflows on smaller screens
                 }}
               >
-                <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    gap: 0.5,
+                    flexShrink: 1,
+                    minWidth: 0,
+                  }}
+                >
                   <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ textDecoration: "line-through", display: "block" }}
-                  >
-                    {bag.originalPrice.toFixed(2)} DKK
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
+                    variant="h6"
                     color="primary"
-                    sx={{ fontWeight: "bold", lineHeight: 1 }}
+                    sx={{
+                      fontWeight: "bold",
+                      lineHeight: 1,
+                      fontSize: { xs: "1.1rem", sm: "1.25rem" },
+                      whiteSpace: "nowrap",
+                    }}
                   >
                     {bag.price.toFixed(2)} DKK
                   </Typography>
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{
+                      textDecoration: "line-through",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {bag.originalPrice.toFixed(2)} DKK
+                  </Typography>
                 </Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.5,
+                    flexShrink: 0,
+                  }}
+                >
                   <Chip
                     label={`${bag.quantity} left`}
                     size="small"
                     sx={{
                       bgcolor: "success.main",
                       color: "white",
-                      height: "20px",
+                      height: { xs: "18px", sm: "20px" },
                       "& .MuiChip-label": {
-                        px: 1,
-                        fontSize: "0.75rem",
+                        px: { xs: 0.5, sm: 1 },
+                        fontSize: { xs: "0.65rem", sm: "0.75rem" },
                       },
                     }}
                   />
@@ -152,10 +237,10 @@ export default function FoodBagList() {
                     sx={{
                       bgcolor: "error.main",
                       color: "white",
-                      height: "20px",
+                      height: { xs: "18px", sm: "20px" },
                       "& .MuiChip-label": {
-                        px: 1,
-                        fontSize: "0.75rem",
+                        px: { xs: 0.5, sm: 1 },
+                        fontSize: { xs: "0.65rem", sm: "0.75rem" },
                       },
                     }}
                   />

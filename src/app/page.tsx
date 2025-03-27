@@ -18,6 +18,7 @@ export default function Home() {
         <Container
           maxWidth="xl"
           sx={{ display: "flex", flexDirection: "column", gap: 2, py: 2 }}
+          className="bg-white rounded-lg"
         >
           {mapVisible && <MapView />}
           <FoodBagList />

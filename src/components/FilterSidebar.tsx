@@ -53,19 +53,23 @@ export default function FilterSidebar() {
   return (
     <Paper
       sx={{
-        width: 280,
-        height: "calc(100vh - 80px)",
+        width: { xs: "100%", md: 280 },
+        height: { xs: "auto", md: "calc(100vh - 80px)" },
         display: "flex",
         flexDirection: "column",
-        borderRadius: 0,
+        borderRadius: { xs: 0, sm: 1 },
+        position: { xs: "static", md: "sticky" },
+        top: { md: "80px" },
+        zIndex: 1,
+        mb: { xs: 2, md: 0 },
       }}
-      elevation={1}
     >
       <Box
         sx={{
-          p: 2,
+          p: { xs: 1.5, sm: 2 },
           flex: 1,
           overflow: "auto",
+          maxHeight: { xs: "none", md: "calc(100vh - 80px)" },
           "&::-webkit-scrollbar": {
             width: "8px",
           },
@@ -74,24 +78,32 @@ export default function FilterSidebar() {
           },
           "&::-webkit-scrollbar-thumb": {
             background: "#888",
-            borderRadius: "4px",
+            borderRadius: "8px",
           },
           "&::-webkit-scrollbar-thumb:hover": {
             background: "#555",
           },
         }}
       >
-        <Typography variant="h6" sx={{ mb: 2 }}>
+        <Typography
+          variant="h6"
+          sx={{ mb: 2, fontSize: { xs: "1.1rem", sm: "1.25rem" } }}
+        >
           Filters
         </Typography>
 
-        <Box sx={{ mb: 3 }}>
+        <Box sx={{ mb: { xs: 2, sm: 3 } }}>
           <TextField
             fullWidth
             placeholder="Search stores or items"
             value={filters.searchQuery}
             onChange={(e) => dispatch(setSearchQuery(e.target.value))}
             size="small"
+            sx={{
+              "& .MuiInputBase-root": {
+                fontSize: { xs: "0.875rem", sm: "1rem" },
+              },
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -114,8 +126,11 @@ export default function FilterSidebar() {
           />
         </Box>
 
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="subtitle2" sx={{ mb: 1 }}>
+        <Box sx={{ mb: { xs: 2, sm: 3 } }}>
+          <Typography
+            variant="subtitle2"
+            sx={{ mb: 1, fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+          >
             Sort by
           </Typography>
           <RadioGroup
@@ -141,8 +156,12 @@ export default function FilterSidebar() {
           </RadioGroup>
         </Box>
 
-        <Box sx={{ mb: 3, px: 1 }}>
-          <Typography variant="subtitle2" gutterBottom>
+        <Box sx={{ mb: { xs: 2, sm: 3 }, px: { xs: 0.5, sm: 1 } }}>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+          >
             Collection time
           </Typography>
           <Slider
@@ -156,11 +175,20 @@ export default function FilterSidebar() {
               { value: 12, label: "12:00" },
               { value: 24, label: "24:00" },
             ]}
+            sx={{
+              "& .MuiSlider-markLabel": {
+                fontSize: { xs: "0.75rem", sm: "0.875rem" },
+              },
+            }}
           />
         </Box>
 
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="subtitle2" gutterBottom>
+        <Box sx={{ mb: { xs: 2, sm: 3 } }}>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+          >
             Collection day
           </Typography>
           <ToggleButtonGroup
@@ -169,17 +197,27 @@ export default function FilterSidebar() {
             onChange={(e, value) => value && dispatch(setPickupDay(value))}
             fullWidth
             size="small"
+            sx={{
+              "& .MuiToggleButton-root": {
+                fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                py: { xs: 0.5, sm: 0.75 },
+              },
+            }}
           >
             <ToggleButton value="today">Today</ToggleButton>
             <ToggleButton value="tomorrow">Tomorrow</ToggleButton>
           </ToggleButtonGroup>
         </Box>
 
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="subtitle2" gutterBottom>
+        <Box sx={{ mb: { xs: 2, sm: 3 } }}>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+          >
             Food types
           </Typography>
-          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+          <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
             {foodTypes.map((type) => (
               <Chip
                 key={type.id}
@@ -195,16 +233,24 @@ export default function FilterSidebar() {
                     ? "filled"
                     : "outlined"
                 }
+                sx={{
+                  fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                  height: { xs: "24px", sm: "32px" },
+                }}
               />
             ))}
           </Box>
         </Box>
 
         <Box>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography
+            variant="subtitle2"
+            gutterBottom
+            sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+          >
             Diet preferences
           </Typography>
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 0.5 }}>
             {["vegetarian", "vegan"].map((pref) => (
               <Chip
                 key={pref}
@@ -222,6 +268,10 @@ export default function FilterSidebar() {
                     ? "filled"
                     : "outlined"
                 }
+                sx={{
+                  fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                  height: { xs: "24px", sm: "32px" },
+                }}
               />
             ))}
           </Box>
