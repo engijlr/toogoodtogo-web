@@ -11,6 +11,7 @@ import {
   Rating,
   Skeleton,
 } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 import Grid from "@mui/material/Grid";
 import {
   Carousel,
@@ -64,208 +65,153 @@ export default function FoodBagList() {
         }}
         className="w-full"
       >
-        <CarouselContent className="py-4 px-2">
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="h6">Recommended for you</Typography>
+          <Typography
+            variant="body2"
+            color="primary"
+            sx={{ cursor: "pointer" }}
+          >
+            See all
+          </Typography>
+        </Box>
+        <CarouselContent className="py-4 px-4">
           {foodBags?.map((bag) => (
-            <CarouselItem
-              key={bag.id}
-              className={`px-2 ${
-                foodBags.length <= 2 ? "basis-1/2" : "basis-1/3"
-              }`}
-            >
-              <Box
+            <CarouselItem key={bag.id} className="px-2 basis-auto">
+              <Card
                 sx={{
-                  width: foodBags.length >= 4 ? "100%" : 485,
-                  height: "100%",
+                  width: 400,
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  position: "relative",
+                  boxShadow: 3,
+                  backgroundColor: "white",
+                  flex: "0 0 auto",
                 }}
               >
-                <Card
-                  sx={{
-                    display: "flex",
-                    height: "100%",
-                    minHeight: { xs: "100px", sm: "120px" },
-                    overflow: "hidden",
-                    "&:hover": {
-                      boxShadow: 3,
-                      transition: "box-shadow 0.3s ease-in-out",
-                    },
-                  }}
-                >
+                {/* Image and top chips */}
+                <Box sx={{ position: "relative", bgcolor: "#fcefcf" }}>
                   <CardMedia
                     component="img"
-                    sx={{ width: 120, height: "fit", objectFit: "cover" }}
                     image={bag.imageUrl}
                     alt={bag.title}
+                    sx={{
+                      height: 130,
+                      objectFit: "cover",
+                    }}
                   />
+                  <Chip
+                    label={`${bag.quantity} left`}
+                    size="small"
+                    sx={{
+                      position: "absolute",
+                      top: 8,
+                      left: 8,
+                      backgroundColor: "#e0f2c2",
+                      fontWeight: 600,
+                    }}
+                  />
+                  <Chip
+                    icon={<StarIcon sx={{ color: "#000", fill: "#48a999" }} />}
+                    label={bag.rating}
+                    size="small"
+                    sx={{
+                      position: "absolute",
+                      top: 8,
+                      right: 8,
+                      backgroundColor: "#fff",
+                      color: "#000",
+                      fontWeight: 600,
+                    }}
+                  />
+
+                  {/* Store logo */}
+                  <Box
+                    component="img"
+                    src={bag.logoUrl}
+                    alt="store logo"
+                    sx={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: "50%",
+                      position: "absolute",
+                      bottom: 14,
+                      left: 16,
+                      border: "2px solid white",
+                      backgroundColor: "#333",
+                      p: 0.5,
+                      objectFit: "contain",
+                    }}
+                  />
+                </Box>
+
+                <CardContent>
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
-                      flex: 1,
-                      p: { xs: 1, sm: 1.5 },
-                      minWidth: 0,
+                      justifyContent: "space-between",
                     }}
                   >
-                    <Box sx={{ mb: "auto" }}>
-                      <Typography
-                        variant="subtitle1"
-                        sx={{
-                          fontWeight: "bold",
-                          mb: 0.5,
-                          fontSize: { xs: "0.875rem", sm: "1rem" },
-                        }}
-                      >
-                        {bag.storeName}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{
-                          mb: 1,
-                          fontSize: { xs: "0.75rem", sm: "0.875rem" },
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {bag.title}
-                      </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      fontWeight={700}
+                      sx={{ fontSize: "0.95rem", lineHeight: 1.3 }}
+                    >
+                      {bag.storeName}
+                    </Typography>
+                  </Box>
 
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 0.5,
-                          mb: 0.5,
-                          flexWrap: "nowrap",
-                        }}
-                      >
-                        <AccessTimeIcon
-                          sx={{ fontSize: { xs: 14, sm: 16 } }}
-                          color="action"
-                        />
-                        <Typography
-                          variant="caption"
-                          color="text.secondary"
-                          sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
-                        >
-                          Tomorrow {bag.pickupTime.start} - {bag.pickupTime.end}
-                        </Typography>
-                      </Box>
+                  <Typography
+                    variant="body2"
+                    sx={{ fontSize: "0.85rem", color: "#444" }}
+                  >
+                    {bag.title}
+                  </Typography>
 
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 0.5,
-                          flexWrap: "nowrap",
-                        }}
-                      >
-                        <LocationOnIcon
-                          sx={{ fontSize: { xs: 14, sm: 16 } }}
-                          color="action"
-                        />
-                        <Typography
-                          variant="caption"
-                          color="text.secondary"
-                          sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
-                        >
-                          {bag.distance.toFixed(1)} km
-                        </Typography>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 0.5,
-                            ml: "auto",
-                          }}
-                        >
-                          <Rating
-                            value={bag.rating}
-                            readOnly
-                            size="small"
-                            sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}
-                          />
-                          <Typography
-                            variant="caption"
-                            color="text.secondary"
-                            sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
-                          >
-                            {bag.rating}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Box>
+                  <Box sx={{ display: "flex", alignItems: "center", mt: 0.5 }}>
+                    <Typography variant="caption" color="text.secondary">
+                      Pick up: {bag.pickupTime.start} - {bag.pickupTime.end}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {" "}
+                      | {bag.distance.toFixed(1)} km
+                    </Typography>
+                  </Box>
 
-                    <Box
+                  <Box
+                    sx={{
+                      borderTop: "1px dashed #ddd",
+                      mt: 0.5,
+                      pt: 0.5,
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      gap: 1,
+                      alignItems: "baseline",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
                       sx={{
-                        display: "flex",
-                        alignItems: "flex-end",
-                        justifyContent: "space-between",
-                        mt: 1,
-                        flexWrap: "wrap",
+                        textDecoration: "line-through",
+                        color: "#999",
+                        fontWeight: 400,
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "baseline",
-                          gap: 0.5,
-                          flexShrink: 1,
-                          minWidth: 0,
-                        }}
-                      >
-                        <Typography
-                          variant="body1"
-                          color="primary"
-                          sx={{
-                            fontWeight: "bold",
-                            lineHeight: 1,
-                            fontSize: { xs: "0.8rem" },
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {bag.price.toFixed(2)} DKK
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          color="text.secondary"
-                          sx={{
-                            textDecoration: "line-through",
-                            fontSize: { xs: "0.7rem", sm: "0.75rem" },
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {bag.originalPrice.toFixed(2)} DKK
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 0.5,
-                          flexShrink: 0,
-                        }}
-                      >
-                        <Chip
-                          label={`${bag.quantity} left`}
-                          size="small"
-                          sx={(theme) => ({
-                            borderColor: "success.main",
-                            backgroundColor: theme.palette.success.main,
-                            color: "white",
-                            height: { xs: "18px", sm: "20px" },
-                            [`& .${chipClasses.label}`]: {
-                              px: { xs: 0.5, sm: 1 },
-                              fontSize: { xs: "0.65rem", sm: "0.75rem" },
-                            },
-                          })}
-                        />
-                      </Box>
-                    </Box>
+                      DKK{bag.originalPrice.toFixed(2)}
+                    </Typography>
+                    <Typography variant="subtitle1" fontWeight={700}>
+                      DKK{bag.price.toFixed(2)}
+                    </Typography>
                   </Box>
-                </Card>
-              </Box>
+                </CardContent>
+              </Card>
             </CarouselItem>
           ))}
         </CarouselContent>

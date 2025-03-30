@@ -14,12 +14,19 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { partnerLogos, partnersLogos2 } from "@/store/mockData";
 import PartnerMarquee from "@/components/PartnerMarquee";
+import PlacesAutocomplete from "@/components/PlacesAutocomplete";
 
 export default function Home() {
   const router = useRouter();
 
   const handleLocateMe = () => {
     router.push("/find-bag");
+  };
+
+  const handlePlaceSelect = (place: google.maps.places.PlaceResult) => {
+    if (place.geometry?.location) {
+      router.push("/find-bag");
+    }
   };
 
   return (
@@ -92,24 +99,9 @@ export default function Home() {
                 }}
               >
                 <PlaceOutlinedIcon sx={{ color: "action.active", mr: 1 }} />
-
-                <TextField
-                  placeholder="Enter postal code or city name"
-                  variant="standard"
-                  fullWidth
-                  InputProps={{
-                    disableUnderline: true,
-                    sx: {
-                      "& input": {
-                        padding: "10px 0",
-                      },
-                    },
-                  }}
-                  sx={{
-                    backgroundColor: "white",
-                  }}
-                />
-
+                <Box sx={{ flex: 1 }}>
+                  <PlacesAutocomplete onPlaceSelect={handlePlaceSelect} />
+                </Box>
                 <Button
                   onClick={handleLocateMe}
                   startIcon={<NearMeOutlinedIcon />}

@@ -1,4 +1,3 @@
-// components/RecommendedList.tsx
 "use client";
 
 import {
@@ -79,14 +78,14 @@ export default function RecommendedList() {
               />
 
               <Chip
-                icon={<StarIcon sx={{ color: "white" }} />}
+                icon={<StarIcon sx={{ color: "white", fill: "#faaf00" }} />}
                 label={bag.rating}
                 size="small"
                 sx={{
                   position: "absolute",
                   top: 8,
                   right: 8,
-                  backgroundColor: "#388e3c",
+                  backgroundColor: "#000",
                   color: "white",
                   fontWeight: 600,
                 }}
@@ -144,7 +143,8 @@ export default function RecommendedList() {
                   Pick up today: {bag.pickupTime}
                 </Typography>
                 <Typography variant="caption" color="text.secondary">
-                  {bag.distance.toFixed(1)} km
+                  {" "}
+                  | {bag.distance.toFixed(1)} km
                 </Typography>
               </Box>
 

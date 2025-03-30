@@ -5,6 +5,7 @@ export interface FoodBag {
   id: string;
   storeName: string;
   title: string;
+  logoUrl: string;
   description: string;
   price: number;
   originalPrice: number;
