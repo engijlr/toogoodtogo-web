@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import Navbar from "@/components/Navbar";
+import { Box } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClientLayout>
-          <Navbar />
-          {children}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
+            }}
+          >
+            <Navbar />
+            <Box sx={{ flexGrow: 1 }}>{children}</Box>
+          </Box>
         </ClientLayout>
       </body>
     </html>

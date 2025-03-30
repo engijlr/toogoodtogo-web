@@ -168,3 +168,35 @@ export const recommendedBags: RecommendedBag[] = [
     quantity: 1,
   },
 ];
+
+export const partnerLogos = [
+  "lidl.png",
+  "7eleven.png",
+  "hello.png",
+  "q8.png",
+  "radisson.png",
+  "starbucks.png",
+  "coop.png",
+  "scandic.png",
+  "flammen.png",
+  "meny.png",
+  "ikea.png",
+  "kfc.png",
+  "laplace.png",
+];
+
+export const partnersLogos2 = [
+  "superbrugsen.png",
+  "bakemyday.png",
+  "netto.png",
+  "tsc.png",
+  "reinh.png",
+  "jensens.png",
+  "den.png",
+  "scrone.png",
+  "franske.png",
+  "espressohouse.png",
+  "rossopomo.png",
+  "lidl.png",
+  "radisson.png",
+];

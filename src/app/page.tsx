@@ -12,6 +12,8 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { partnerLogos, partnersLogos2 } from "@/store/mockData";
+import PartnerMarquee from "@/components/PartnerMarquee";
 
 export default function Home() {
   const router = useRouter();
@@ -20,33 +22,13 @@ export default function Home() {
     router.push("/find-bag");
   };
 
-  const partnerLogos = [
-    "lidl.png",
-    "7eleven.png",
-    "hello.png",
-    "q8.png",
-    "radisson.png",
-    "starbucks.png",
-    "coop.png",
-    "scandic.png",
-    "flammen.png",
-    "meny.png",
-    "ikea.png",
-    "kfc.png",
-    "laplace.png",
-    "superbrugsen.png",
-    "bakemyday.png",
-    "netto.png",
-    "tsc.png",
-    "netto.png",
-  ];
-
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
+        height: "calc(100vh - 64px)",
+        overflow: "hidden",
       }}
     >
       {/* Hero Section */}
@@ -181,47 +163,8 @@ export default function Home() {
       </Box>
 
       {/* Partners Section */}
-      <Box sx={{ backgroundColor: "white", py: 6 }}>
-        <Container maxWidth="xl">
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "repeat(3, 1fr)",
-                sm: "repeat(4, 1fr)",
-                md: "repeat(6, 1fr)",
-              },
-              gap: 4,
-              alignItems: "center",
-              justifyItems: "center",
-            }}
-          >
-            {partnerLogos.map((logo, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: "80px",
-                  height: "80px",
-                  borderRadius: 2,
-                  backgroundColor: "#f5f5f5",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
-                }}
-              >
-                <Image
-                  src={`/${logo}`}
-                  alt={`Partner logo ${index + 1}`}
-                  width={60}
-                  height={60}
-                  style={{ objectFit: "contain" }}
-                />
-              </Box>
-            ))}
-          </Box>
-        </Container>
-      </Box>
+      <PartnerMarquee logos={partnerLogos} />
+      <PartnerMarquee logos={partnersLogos2} direction="right" />
     </Box>
   );
 }
