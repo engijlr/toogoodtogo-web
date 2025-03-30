@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Container,
-  Typography,
-  TextField,
-  Button,
-  InputAdornment,
-} from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import NearMeOutlinedIcon from "@mui/icons-material/NearMeOutlined";
 import Image from "next/image";

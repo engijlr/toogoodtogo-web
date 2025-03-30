@@ -7,8 +7,6 @@ import {
   Typography,
   Box,
   Chip,
-  chipClasses,
-  Rating,
   Skeleton,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
@@ -17,15 +15,10 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
-
 import { useGetFoodBagsQuery } from "@/store/services/foodBagApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function FoodBagList() {
   const filters = useSelector((state: RootState) => state.filters);

@@ -7,7 +7,7 @@ export type DietPreference = "vegetarian" | "vegan";
 interface FiltersState {
   searchQuery: string;
   sortBy: SortOption;
-  pickupTimeRange: [number, number]; // [start, end] in hours (0-24)
+  pickupTimeRange: [number, number];
   pickupDay: "today" | "tomorrow";
   foodTypes: FoodType[];
   dietPreferences: DietPreference[];
@@ -16,7 +16,7 @@ interface FiltersState {
 const initialState: FiltersState = {
   searchQuery: "",
   sortBy: "relevance",
-  pickupTimeRange: [12, 18], // 12:00 - 18:00
+  pickupTimeRange: [12, 18],
   pickupDay: "today",
   foodTypes: [],
   dietPreferences: [],
@@ -54,6 +54,7 @@ const filtersSlice = createSlice({
         state.dietPreferences.splice(index, 1);
       }
     },
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     resetFilters: (state) => {
       return initialState;
     },

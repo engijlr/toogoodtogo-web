@@ -8,6 +8,7 @@ import { Box, Container } from "@mui/material";
 import { useState } from "react";
 
 export default function FindBag() {
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [mapVisible, setMapVisible] = useState(true);
 
   return (

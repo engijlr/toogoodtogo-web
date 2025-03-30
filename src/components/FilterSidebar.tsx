@@ -8,7 +8,6 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  Slider,
   ToggleButtonGroup,
   ToggleButton,
   Chip,
@@ -22,7 +21,6 @@ import { RootState } from "@/store/store";
 import {
   setSearchQuery,
   setSortBy,
-  setPickupTimeRange,
   setPickupDay,
   toggleFoodType,
   toggleDietPreference,
@@ -34,10 +32,6 @@ import {
 export default function FilterSidebar() {
   const dispatch = useDispatch();
   const filters = useSelector((state: RootState) => state.filters);
-
-  const handleTimeRangeChange = (event: Event, newValue: number | number[]) => {
-    dispatch(setPickupTimeRange(newValue as [number, number]));
-  };
 
   const handleClearSearch = () => {
     dispatch(setSearchQuery(""));

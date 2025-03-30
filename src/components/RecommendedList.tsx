@@ -7,7 +7,6 @@ import {
   CardMedia,
   CardContent,
   Chip,
-  Rating,
   IconButton,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
