@@ -5,6 +5,7 @@ import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import { useGetFoodBagsQuery } from "@/store/services/foodBagApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { mockFoodBags, mockFoodBags2 } from "@/store/mockData";
 
 const containerStyle = {
   width: "100%",
@@ -12,7 +13,7 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 55.676098, // Copenhagen coordinates
+  lat: 55.676098,
   lng: 12.568337,
 };
 
@@ -36,10 +37,12 @@ export default function MapView() {
   });
 
   const filters = useSelector((state: RootState) => state.filters);
-  const { data: foodBags } = useGetFoodBagsQuery({
+  const { data: queryFoodBags } = useGetFoodBagsQuery({
     ...filters,
+    query: filters.searchQuery,
     lat: center.lat,
     lng: center.lng,
+    initialData: [...mockFoodBags, ...mockFoodBags2],
   });
 
   if (!isLoaded) return null;
@@ -61,7 +64,7 @@ export default function MapView() {
         zoom={14}
         options={defaultOptions}
       >
-        {foodBags?.map((bag) => (
+        {queryFoodBags?.map((bag) => (
           <MarkerF
             key={bag.id}
             position={{

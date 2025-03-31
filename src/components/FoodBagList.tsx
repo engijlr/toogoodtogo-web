@@ -16,17 +16,29 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { useGetFoodBagsQuery } from "@/store/services/foodBagApi";
+import { useGetFoodBagsQuery, FoodBag } from "@/store/services/foodBagApi";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-export default function FoodBagList() {
+interface FoodBagListProps {
+  title?: string;
+  initialFoodBags?: FoodBag[];
+  useFilters?: boolean;
+}
+
+export default function FoodBagList({
+  title = "Recommended for you",
+  initialFoodBags,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  useFilters = true,
+}: FoodBagListProps) {
   const filters = useSelector((state: RootState) => state.filters);
   const { data: foodBags, isLoading } = useGetFoodBagsQuery({
     ...filters,
     query: filters.searchQuery,
     lat: 55.676098,
     lng: 12.568337,
+    initialData: initialFoodBags,
   });
   console.log(foodBags);
   if (isLoading) {
@@ -66,7 +78,7 @@ export default function FoodBagList() {
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="h6">Recommended for you</Typography>
+          <Typography variant="h6">{title}</Typography>
           <Typography
             variant="body2"
             color="primary"

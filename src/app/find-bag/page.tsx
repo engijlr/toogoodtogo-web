@@ -3,9 +3,9 @@
 import FilterSidebar from "@/components/FilterSidebar";
 import FoodBagList from "@/components/FoodBagList";
 import MapView from "@/components/MapView";
-import RecommendedList from "@/components/RecommendedList";
 import { Box, Container } from "@mui/material";
 import { useState } from "react";
+import { mockFoodBags, mockFoodBags2 } from "@/store/mockData";
 
 export default function FindBag() {
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -27,8 +27,14 @@ export default function FindBag() {
           className="bg-white rounded-lg"
         >
           {mapVisible && <MapView />}
-          <FoodBagList />
-          <RecommendedList />
+          <FoodBagList
+            title="Recommended for you"
+            initialFoodBags={mockFoodBags}
+          />
+          <FoodBagList
+            title="Save before it's too late"
+            initialFoodBags={mockFoodBags2}
+          />
         </Container>
       </Box>
     </Container>

@@ -36,13 +36,15 @@ export interface SearchParams {
   dietPreferences?: string[];
   lat?: number;
   lng?: number;
+  initialData?: FoodBag[];
 }
 
 // Mock API implementation
 const mockApiCall = (params: SearchParams): Promise<FoodBag[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      let filteredBags = [...mockFoodBags];
+      // Start with initial data if provided, otherwise use mockFoodBags
+      let filteredBags = [...(params.initialData || mockFoodBags)];
 
       // Apply search query filter
       if (params.query && params.query.trim() !== "") {
